@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            background-color: powderblue; /* Light Gray background */
+        }
+
+        #chef-dashboard {
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .booked-item {
+            margin-right: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd; /* Light Gray border */
+            border-radius: 8px;
+            background-color: #fff; /* White background */
+            max-width: 300px;
+            width: 100%;
+            display: inline-block;
+        }
+
+        .booked-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .accept-btn,
+        .reject-btn,
+        .details-btn {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .accept-btn {
+            background-color: #2ecc71; /* Green background for Accept button */
+            color: #fff;
+        }
+
+        .reject-btn {
+            background-color: #e74c3c; /* Red background for Reject button */
+            color: #fff;
+        }
+
+        .details-btn {
+            display: none;
+            background-color: #3498db; /* Blue background for Details button */
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .details-frame {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ddd; /* Light Gray border */
+            border-radius: 8px;
+            background-color: #fff; /* White background */
+            max-width: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chef-dashboard">
+        <!-- Sample booked items -->
+        <div class="booked-item">
+            <img src="chicken.jpg" alt="Chicken Pickle">
+            <h3>Item: Chicken Pickle</h3>
+            <p>Quantity: 1</p>
+            <p>Time: 15:00</p>
+            <p>Date: 2024-02-10</p>
+            <button class="accept-btn" onclick="changeStatus(this, 'Accepted')">Accept</button>
+            <button class="reject-btn" onclick="changeStatus(this, 'Rejected')">Reject</button>
+            <button class="details-btn" onclick="showDetails(this)">Details</button>
+            <div class="details-frame">
+                <img src="pic.jpg" alt="Chocolate Cake">
+                <p>Name: Venkatesh</p>
+                <p>Phone: 8956432188</p>
+                <p>Address: D-no:4-90, 12th ward,viravasaram, Bhimavaram </p>
+            </div>
+        </div>
+
+        <div class="booked-item">
+            <img src="prawni.jpg" alt="Prawns Pickle">
+            <h3>Item: Prawns Pickle</h3>
+            <p>Quantity: 2</p>
+            <p>Time: 18:30</p>
+            <p>Date: 2024-02-11</p>
+            <button class="accept-btn" onclick="changeStatus(this, 'Accepted')">Accept</button>
+            <button class="reject-btn" onclick="changeStatus(this, 'Rejected')">Reject</button>
+            <button class="details-btn" onclick="showDetails(this)">Details</button>
+            <div class="details-frame">
+                <img src="pic.jpg" alt="Strawberry Cake">
+                <p>Name: Rani</p>
+                <p>Phone: 9876543210</p>
+                <p>Address: Dno:5-40, 17th ward, Roypeta, Narasapur</p>
+            </div>
+        </div>
+        <!-- Add more booked items here -->
+    </div>
+
+    <script>
+        function changeStatus(button, status) {
+            var bookedItem = button.parentNode;
+            var detailsBtn = bookedItem.querySelector('.details-btn');
+            var detailsFrame = bookedItem.querySelector('.details-frame');
+
+            if (status === 'Accepted') {
+                bookedItem.style.backgroundColor = '#d4edda'; /* Light Green background for accepted item */
+                detailsBtn.style.display = 'inline-block';
+            } else if (status === 'Rejected') {
+                bookedItem.style.backgroundColor = '#f8d7da'; /* Light Red background for rejected item */
+                detailsBtn.style.display = 'none';
+                detailsFrame.style.display = 'none';
+            }
+        }
+
+        function showDetails(button) {
+            var bookedItem = button.parentNode;
+            var detailsFrame = bookedItem.querySelector('.details-frame');
+            detailsFrame.style.display = detailsFrame.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+
+</html>
+

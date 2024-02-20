@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homelyfeast.com</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+            min-height: 100vh;
+            background-color: powderblue; /* Adjust the background color */
+        }
+
+        h1 {
+            color: black;
+            font-size: 3.5em; /* Adjust the font size as needed */
+            margin-top: 20px; /* Adjust the margin as needed */
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px; /* Adjust the max-width as needed */
+            margin-top: 20px; /* Adjust the margin as needed */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 0 20px; /* Increase the margin between images */
+            border-radius: 10px; /* Adjust the border-radius as needed */
+            cursor: pointer; /* Add pointer cursor to indicate it's clickable */
+        }
+
+        .button-container {
+            margin-top: 10px;
+        }
+
+        .navigation-button {
+            background-color: #2ecc71; /* Light Green background */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* Booking Status Bar Styling */
+        #bookingStatusBar {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #2ecc71; /* Light Green background */
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Booking Status Frame Styling */
+        #bookingStatusFrame {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            position: fixed;
+            top: 50px;
+            right: 10px;
+        }
+
+        .boxContent {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .cancelButtonBox {
+            cursor: pointer;
+            display: inline-block;
+            background-color: #ff6347; /* Red background for close button */
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><b>PICK ANY ONE</b></h1>
+
+    <div class="image-container">
+        <div>
+            <img src="pick.jpg" width="250" height="400" alt="pick">
+            <div class="button-container">
+                <a href="pick.html" class="navigation-button">Pickle</a>
+            </div>
+        </div>
+        <div>
+            <img src="pick2.jpg" width="250" alt="pick2">
+            <div class="button-container">
+                <a href="cake.html" class="navigation-button">Cake</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="bookingStatusBar" onclick="showBookingStatusFrame()">Booking Status</div>
+
+
+    <div id="bookingStatusFrame">
+        <div class="boxContent" style="background-color: #2ecc71; color: #fff;">
+            <p>Chicken Pickle</p>
+            <span class="cancelButtonBox" onclick="cancelBookingStatusFrame()">❌</span>
+        </div>
+    </div>
+
+    <script>
+        function showBookingStatusFrame() {
+            var bookingStatusFrame = document.getElementById('bookingStatusFrame');
+            bookingStatusFrame.style.display = 'block';
+        }
+
+        function cancelBookingStatusFrame() {
+            var bookingStatusFrame = document.getElementById('bookingStatusFrame');
+            bookingStatusFrame.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
+

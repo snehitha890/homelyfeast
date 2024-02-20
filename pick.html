@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color:powderblue; /* Powdered Blue background */
+        }
+
+        #search-bar {
+            margin: 20px;
+            padding: 10px;
+            width: 80%;
+        }
+
+        #product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #b3e0f2; /* Lighter Powdered Blue border */
+            border-radius: 10px;
+            max-width: 300px;
+            background-color: #ecf9f9; /* Lighter Powdered Blue background */
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .buy-now-btn {
+            background-color: #2ecc71; /* Light Green background */
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-details {
+            display: none;
+            margin: 20px;
+            text-align: left;
+            background-color: #ecf9f9; /* Lighter Powdered Blue background */
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .request-section {
+            margin: 20px;
+            background-color: #ecf9f9; /* Lighter Powdered Blue background */
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        #request-btn {
+            background-color: #3498db; /* Powdered Blue background */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="search-bar" oninput="filterProducts()" placeholder="Search for products...">
+
+    <div id="product-container"></div>
+
+    <div class="product-details">
+        <h2 id="product-name"></h2>
+        <p id="product-ingredients"></p>
+        <p id="product-time"></p>
+        <p id="product-price"></p>
+        <p id="product-ratings"></p>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1">
+        <label for="date">Select a date:</label>
+        <input type="date" id="date" name="date">
+        <label for="time">Select a time:</label>
+        <input type="time" id="time" name="time">
+    </div>
+
+    <div class="request-section">
+        <button id="request-btn" onclick="sendRequest()">Request</button>
+    </div>
+
+    <script>
+        // Sample product data
+        var productsData = [
+            { name: 'Chicken Pickle 1', category: 'chicken', image: 'chicken.jpg', ingredients: ['Chicken', 'Spices', 'Oil'],price: 890,ratings:5, time: '2 hours' },
+            { name: 'Prawn Pickle 1', category: 'prawn', image: 'prawni.jpg', ingredients: ['Prawn', 'Spices', 'Oil'],price: 800,ratings:3, time: '1.5 hours' },
+            { name: 'Mango Pickle 1', category: 'mango', image: 'mangopickle1.JPG', ingredients: ['Mango', 'Spices', 'Oil'],price: 680,ratings:4, time: '3 hours' }
+            // Add more products as needed
+        ];
+
+        // Initial load of all products
+        loadProducts(productsData);
+
+        function loadProducts(products) {
+            var container = document.getElementById('product-container');
+            container.innerHTML = '';
+
+            for (var i = 0; i < products.length; i++) {
+                var product = products[i];
+
+                var productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.dataset.category = product.category.toLowerCase();
+
+                var img = document.createElement('img');
+                img.src = product.image;
+                img.alt = product.name;
+
+                var buyNowBtn = document.createElement('div');
+                buyNowBtn.className = 'buy-now-btn';
+                buyNowBtn.innerHTML = 'Buy Now';
+                buyNowBtn.onclick = function (name, ingredients, time, price,ratings) {
+                    return function () {
+                        showProductDetails(name, ingredients, time, price,ratings);
+                    };
+                }(product.name, product.ingredients.join(', '), product.time, product.price ,product.ratings);
+
+                productDiv.appendChild(img);
+                productDiv.appendChild(buyNowBtn);
+                container.appendChild(productDiv);
+            }
+        }
+
+        function showProductDetails(name, ingredients, time,price,ratings) {
+            var productNameElem = document.getElementById('product-name');
+            var productIngredientsElem = document.getElementById('product-ingredients');
+            var productTimeElem = document.getElementById('product-time');
+            var productPriceElem = document.getElementById('product-price');
+            var productRatingElem = document.getElementById('product-ratings');
+
+            productNameElem.innerText = name;
+            productIngredientsElem.innerText = 'Ingredients: ' + ingredients;
+            productTimeElem.innerText = 'Time to prepare: ' + time;
+            productPriceElem.innerText = 'Price: Rs. ' + price.toFixed(2);
+            productRatingElem.innerText = 'Rating: ' + ratings;
+            var productDetails = document.querySelector('.product-details');
+            productDetails.style.display = 'block';
+        }
+
+
+        function sendRequest() {
+            var quantity = document.getElementById('quantity').value;
+            var selectedDate = document.getElementById('date').value;
+            var selectedTime = document.getElementById('time').value;
+
+            alert('Request sent successfully\nQuantity: ' + quantity +
+                '\nDate: ' + selectedDate +
+                '\nTime: ' + selectedTime);
+        }
+
+        function filterProducts() {
+            var searchTerm = document.getElementById('search-bar').value.toLowerCase();
+            var filteredProducts = productsData.filter(function (product) {
+                return product.name.toLowerCase().includes(searchTerm) || product.category.toLowerCase().includes(searchTerm);
+            });
+
+            loadProducts(filteredProducts);
+        }
+    </script>
+</body>
+
+</html>
+
